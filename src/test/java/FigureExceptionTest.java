@@ -1,5 +1,7 @@
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import ru.aplana.demo.IllegalFigureParamException;
 import ru.aplana.demo.Rectangle;
 
@@ -13,6 +15,15 @@ import static org.junit.Assert.fail;
  */
 public class FigureExceptionTest {
 
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+
+	@Test
+	public void testRule(){
+		exception.expect(IllegalFigureParamException.class);
+		exception.expectMessage("стороны должны быть положительным числом!");
+		new Rectangle(1, 0);
+	}
 
 	@Test(expected = IllegalFigureParamException.class)
 	public void rectangleTest() {
